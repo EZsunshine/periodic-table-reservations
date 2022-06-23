@@ -12,7 +12,6 @@ const tablesRouter = require("./tables/tables.router");
 
 const app = express();
 
-//app.use(cors({origin: 'https://reservation2022-client.herokuapp.com'}));
 app.use(cors());
 app.options('*', cors());
 app.use(express.json());

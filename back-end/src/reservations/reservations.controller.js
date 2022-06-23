@@ -229,22 +229,18 @@ async function list(req, res) {
   const { date, viewDate, mobile_number } = req.query;
   if (date)
   {
-    console.log("111111");
     const data = await service.listByDate(date);
     res.json({ data });
   } else if (viewDate)
   {
-    console.log("222222");
     const data = await service.listByDate(viewDate);
     res.json({ data });
   } else if (mobile_number)
   {
-    console.log("3333333");
     const data = await service.listByPhone(mobile_number);
     res.json({ data });
   } else
   {
-    console.log("444444");
     const data = await service.list();
     res.json({ data });
   }
