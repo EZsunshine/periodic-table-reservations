@@ -1,13 +1,13 @@
 const fetch = require("cross-fetch");
 
-const API_BASE_URL = 'https://reservatioin2022-backend.herokuapp.com';
- // process.env.REACT_APP_API_BASE_URL || "http://localhost:5000";
+const API_BASE_URL =
+  process.env.REACT_APP_API_BASE_URL || "http://localhost:5000";
 
 /**
  * Defines the default headers for these functions to work with `json-server`
  */
 const headers = { "Content-Type": "application/json" };
-headers.append("Access-Control-Allow-Origin", "*");
+
 /**
  * Fetch `json` from the specified URL and handle error status codes and ignore `AbortError`s
  *

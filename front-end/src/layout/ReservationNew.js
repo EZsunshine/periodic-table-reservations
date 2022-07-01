@@ -45,4 +45,4 @@ const ReservationNew = () => {
   )
 }
 
-export default ReservationNew
+export default ReservationNew;

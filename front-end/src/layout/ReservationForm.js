@@ -1,112 +1,110 @@
-import React from 'react';
-import {useHistory} from "react-router-dom";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
-const ReservationForm = ({formData, setFormData, handleSubmit}) => {
-    const history = useHistory();
+const ReservationForm = ({ handleSubmit }) => {
+  const history = useHistory();
+  const initialState = {
+    first_name: "",
+    last_name: "",
+    mobile_number: "",
+    reservation_date: "",
+    reservation_time: "",
+    people: 0,
+  };
+  const handleCancel = (e) => {
+    e.preventDefault();
+    history.goBack();
+  };
 
-    const handleCancel = (e) => {
-        e.preventDefault();
-        history.goBack();
-    }
+  const [formData, setFormData] = useState(initialState);
+  function changeHandler({ target: { name, value } }) {
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  }
 
-    console.log(formData);
-    
+  function changeHandlerNum({ target: { name, value } }) {
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: Number(value),
+    }));
+  }
 
   return (
     <form onSubmit={handleSubmit}>
-        <header><h3>New Reservation</h3></header>
-
-        <div>
-            <label htmlFor="firstName">
-                First Name:
-                <input type="tex" id="firstName" name="firstName" required
-                onChange={(e) => setFormData({
-                    first_name: e.target.value,
-                    last_name: formData.last_name,
-                    mobile_number: formData.mobile_number,
-                    reservation_date: formData.reservation_date,
-                    reservation_time: formData.reservation_time,
-                    people: formData.people,
-                })}
-                value={formData.first_name} />
-            </label>
-            <br />
-            <label htmlFor="lastName">
-                Last Name:
-                <input type="tex" id="lastName" name="lastName" required
-                onChange={(e) => setFormData({
-                    first_name: formData.first_name,
-                    last_name: e.target.value,
-                    mobile_number: formData.mobile_number,
-                    reservation_date: formData.reservation_date,
-                    reservation_time: formData.reservation_time,
-                    people: formData.people,
-                })}
-                value={formData.last_name} />
-            </label>
-            <br />
-            <label htmlFor="phoneNumber">
-                Phone Number:
-                <input type="number" id="phoneNumber" name="phoneNumber" required
-                onChange={(e) => setFormData({
-                    first_name: formData.first_name,
-                    last_name: formData.last_name,
-                    mobile_number: e.target.value,
-                    reservation_date: formData.reservation_date,
-                    reservation_time: formData.reservation_time,
-                    people: formData.people,
-                })}
-                value={formData.mobile_number} />
-            </label>
-            <br />
-            <label htmlFor="date">
-                Reservation Date:
-                <input type="date" id="date" name="date" required
-                onChange={(e) => setFormData({
-                    first_name: formData.first_name,
-                    last_name: formData.last_name,
-                    mobile_number: formData.mobile_number,
-                    reservation_date: e.target.value,
-                    reservation_time: formData.reservation_time,
-                    people: formData.people,
-                })}
-                value={formData.reservation_date} />
-            </label>
-            <br />
-            <label htmlFor="time">
-                Reservation Time:
-                <input type="time" id="time" name="time" required
-                onChange={(e) => setFormData({
-                    first_name: formData.first_name,
-                    last_name: formData.last_name,
-                    mobile_number: formData.mobile_number,
-                    reservation_date: formData.reservation_date,
-                    reservation_time: e.target.value,
-                    people: formData.people,
-                })}
-                value={formData.reservation_time} />
-            </label>
-            <br />
-            <label htmlFor="size">
-                Party Size:
-                <input type="number" id="size" name="size" required
-                onChange={(e) => setFormData({
-                    first_name: formData.first_name,
-                    last_name: formData.last_name,
-                    mobile_number: formData.mobile_number,
-                    reservation_date: formData.reservation_date,
-                    reservation_time: formData.reservation_time,
-                    people: e.target.valueAsNumber,
-                })}
-                value={formData.people} />
-            </label>
-            <div>
-                <button>Submit</button>
-                <button onClick={handleCancel}>Cancel</button>
-            </div>
+      <h3>New Reservation</h3>
+      <div className="form-group row">
+        <label className="col-sm-2 col-form-label">First name:</label>
+        <div className="col-sm-10">
+          <input
+            name="first_name"
+            value={formData.first_name}
+            onChange={changeHandler}
+          />
         </div>
+      </div>
+      <div className="form-group row">
+        <label className="col-sm-2 col-form-label">Last name:</label>
+        <div className="col-sm-10">
+          <input
+            name="last_name"
+            value={formData.last_name}
+            onChange={changeHandler}
+          />
+        </div>
+      </div>
+      <div className="form-group row">
+        <label className="col-sm-2 col-form-label">Mobile Number:</label>
+        <div className="col-sm-10">
+          <input
+            name="mobile_number"
+            type="tel"
+            value={formData.mobile_number}
+            onChange={changeHandler}
+          />
+        </div>
+      </div>
+      <div className="form-group row">
+        <label className="col-sm-2 col-form-label">Reservation Date:</label>
+        <div className="col-sm-10">
+          <input
+            name="reservation_date"
+            type="date"
+            value={formData.reservation_date}
+            onChange={changeHandler}
+          />
+        </div>
+      </div>
+      <div className="form-group row">
+        <label className="col-sm-2 col-form-label">Time:</label>
+        <div className="col-sm-10">
+          <input
+            name="reservation_time"
+            type="time"
+            value={formData.reservation_time}
+            onChange={changeHandler}
+          />
+        </div>
+      </div>
+      <div className="form-group row">
+        <label className="col-sm-2 col-form-label">Number of people:</label>
+        <div className="col-sm-10">
+          <input
+            name="people"
+            type="number"
+            min={1}
+            value={formData.people}
+            onChange={changeHandlerNum}
+          />
+        </div>
+      </div>
+      <button type="submit">Submit</button>
+      <button type="button" onClick={handleCancel}>
+        Cancel
+      </button>
     </form>
-  )
-}
+  );
+};
 
-export default ReservationForm
+export default ReservationForm;
