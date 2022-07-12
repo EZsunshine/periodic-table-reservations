@@ -21,7 +21,6 @@ function TableDetail({ table }) {
 
   const handleFinish = (e) => {
     e.preventDefault();
-
     setError(null);
     const confirmBox = window.confirm(
       "Is this table ready to seat new guests? This cannot be undone."

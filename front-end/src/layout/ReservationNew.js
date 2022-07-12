@@ -52,30 +52,6 @@ const ReservationNew = () => {
       .catch(setShowError);
   };
 
-  // async function handleSubmit(event) {
-  //   event.preventDefault();
-  //   setShowError(false);
-  //   const newRes = {
-  //     first_name: form.first_name,
-  //     last_name: form.last_name,
-  //     mobile_number: form.mobile_number,
-  //     people: Number(form.people),
-  //     reservation_date: form.reservation_date,
-  //     reservation_time: form.reservation_time,
-  //     status: "booked",
-  //   };
-  //   try {
-  //     await createReservation(newRes, abortController.signal);
-  //     history.push(`/dashboard?date=${newRes.reservation_date}`);
-  //   } catch (error) {
-  //     if (error.name !== "AbortError") setShowError(error);
-  //   }
-
-  //   return () => {
-  //     abortController.abort();
-  //   };
-  //}
-
   return (
     <div>
       <ErrorAlert error={showError} />
