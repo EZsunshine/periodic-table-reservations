@@ -1,35 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 
-const ReservationForm = ({ handleSubmit }) => {
+const ReservationForm = ({ form, handleChange, handleSubmit }) => {
   const history = useHistory();
-  const initialState = {
-    first_name: "",
-    last_name: "",
-    mobile_number: "",
-    reservation_date: "",
-    reservation_time: "",
-    people: 0,
-  };
-  const handleCancel = (e) => {
-    e.preventDefault();
-    history.goBack();
-  };
-
-  const [formData, setFormData] = useState(initialState);
-  function changeHandler({ target: { name, value } }) {
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  }
-
-  function changeHandlerNum({ target: { name, value } }) {
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: Number(value),
-    }));
-  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -39,8 +12,9 @@ const ReservationForm = ({ handleSubmit }) => {
         <div className="col-sm-10">
           <input
             name="first_name"
-            value={formData.first_name}
-            onChange={changeHandler}
+            type="text"
+            value={form.first_name}
+            onChange={handleChange}
           />
         </div>
       </div>
@@ -49,8 +23,9 @@ const ReservationForm = ({ handleSubmit }) => {
         <div className="col-sm-10">
           <input
             name="last_name"
-            value={formData.last_name}
-            onChange={changeHandler}
+            type="text"
+            value={form.last_name}
+            onChange={handleChange}
           />
         </div>
       </div>
@@ -59,9 +34,9 @@ const ReservationForm = ({ handleSubmit }) => {
         <div className="col-sm-10">
           <input
             name="mobile_number"
-            type="tel"
-            value={formData.mobile_number}
-            onChange={changeHandler}
+            type="text"
+            value={form.mobile_number}
+            onChange={handleChange}
           />
         </div>
       </div>
@@ -71,8 +46,8 @@ const ReservationForm = ({ handleSubmit }) => {
           <input
             name="reservation_date"
             type="date"
-            value={formData.reservation_date}
-            onChange={changeHandler}
+            value={form.reservation_date}
+            onChange={handleChange}
           />
         </div>
       </div>
@@ -82,8 +57,8 @@ const ReservationForm = ({ handleSubmit }) => {
           <input
             name="reservation_time"
             type="time"
-            value={formData.reservation_time}
-            onChange={changeHandler}
+            value={form.reservation_time}
+            onChange={handleChange}
           />
         </div>
       </div>
@@ -94,13 +69,16 @@ const ReservationForm = ({ handleSubmit }) => {
             name="people"
             type="number"
             min={1}
-            value={formData.people}
-            onChange={changeHandlerNum}
+            value={form.people}
+            onChange={handleChange}
           />
         </div>
       </div>
-      <button type="submit">Submit</button>
-      <button type="button" onClick={handleCancel}>
+
+      <button className="btn btn-success" type="submit">
+        Submit
+      </button>
+      <button className="btn btn-danger" onClick={() => history.goBack()}>
         Cancel
       </button>
     </form>
